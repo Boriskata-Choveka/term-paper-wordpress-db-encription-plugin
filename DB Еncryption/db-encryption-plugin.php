@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name: DB Encryption Plugin
- * Description: Плъгин за криптиране на базата данни в WordPress.
+ * Description: WordPress database encryption plugin.
  * Version: 1.0
  * Author: Boris
  */
@@ -18,8 +18,9 @@ require_once plugin_dir_path(__FILE__) . 'database-integration.php';
 require_once plugin_dir_path(__FILE__) . 'logging.php';
 
 
-function db_encryption_plugin_init() {
-   
+function db_encryption_plugin_init()
+{
+
     global $is_encrypted;
 
 
@@ -39,7 +40,8 @@ function db_encryption_plugin_init() {
 add_action('init', 'db_encryption_plugin_init');
 
 
-function toggle_db_encryption() {
+function toggle_db_encryption()
+{
     $encryption_key = get_option('db_encryption_key');
     $is_encrypted = false;
 
@@ -49,12 +51,12 @@ function toggle_db_encryption() {
     if ($encryption_key) {
         if ($is_encrypted) {
 
-            $encryption_manager->decryptData(); 
+            $encryption_manager->decryptData();
             update_option('db_encryption_status', false);
             echo '<div class="updated"><p>Database has been decrypted.</p></div>';
         } else {
 
-            $encryption_manager->encryptData(); 
+            $encryption_manager->encryptData();
             update_option('db_encryption_status', true);
             echo '<div class="updated"><p>Database has been encrypted.</p></div>';
             echo 'suck';
